@@ -354,13 +354,20 @@ export default function Portfolio() {
                 </a>
               ))}
             </div>
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <MagneticButton className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                <Download className="w-4 h-4 mr-2" />
-                Resume
-              </MagneticButton>
-            </div>
+           <div className="flex items-center space-x-4">
+  <ThemeToggle />
+  <a
+    href="https://drive.google.com/file/d/1JCJBjTHtJq3U4HP5NOnuTZH_l1v9naXN/view?usp=sharing"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <MagneticButton className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+      <Download className="w-4 h-4 mr-2" />
+      Resume
+    </MagneticButton>
+  </a>
+</div>
+
           </div>
         </div>
       </nav>
