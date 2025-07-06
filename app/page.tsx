@@ -402,10 +402,11 @@ export default function Portfolio() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full blur-2xl opacity-30 animate-pulse scale-150" />
               <div className="relative">
                 <img
-                  src="/placeholder.svg?height=200&width=200"
-                  alt="Bheeni Agarwal"
-                  className="w-48 h-48 rounded-full mx-auto object-cover border-4 border-white dark:border-gray-800 shadow-2xl relative z-10 hover:scale-110 transition-all duration-500 hover:rotate-3"
-                />
+  src="https://drive.google.com/uc?export=view&id=1vGhX6hgbERgGt4q_KHMMikvm9A_mbNCp"
+  alt="Bheeni Agarwal"
+  className="w-48 h-48 rounded-full mx-auto object-cover border-4 border-white dark:border-gray-800 shadow-2xl relative z-10 hover:scale-110 transition-all duration-500 hover:rotate-3"
+/>
+
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 animate-spin-slow" />
               </div>
             </div>
