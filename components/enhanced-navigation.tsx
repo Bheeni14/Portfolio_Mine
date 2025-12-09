@@ -131,7 +131,7 @@ export function EnhancedNavigation({ activeSection }: EnhancedNavigationProps) {
               {/* Resume Button */}
               <MagneticButton className="hidden sm:flex bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg">
                 <a
-                  href="https://drive.google.com/file/d/1JCJBjTHtJq3U4HP5NOnuTZH_l1v9naXN/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1DVzARColv-5qscs2AI8FGIuhBeQ1hg9Q/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center"
@@ -187,7 +187,7 @@ export function EnhancedNavigation({ activeSection }: EnhancedNavigationProps) {
               <div className="pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
                 <MagneticButton className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                   <a
-                    href="https://drive.google.com/file/d/1JCJBjTHtJq3U4HP5NOnuTZH_l1v9naXN/view?usp=sharing"
+                    href="https://drive.google.com/file/d/1DVzARColv-5qscs2AI8FGIuhBeQ1hg9Q/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center"
