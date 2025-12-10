@@ -12,17 +12,12 @@ import {
   Eye,
   Calendar,
   Users,
-  Code,
-  Database,
-  Brain,
-  TrendingUp,
-  Zap,
-  Award,
-  PlayCircle,
   BookOpen,
+  PlayCircle,
+  Zap,
   Sparkles
 } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 interface Project {
   title: string
@@ -50,78 +45,93 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
   const [filter, setFilter] = useState("all")
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
-  // Enhanced projects with additional data
-  const enhancedProjects: Project[] = [
+  // Projects extracted from resume (kept only those present in resume)
+  // Resume reference: Titanic Survival Prediction Model, Student Performance Analysis System,
+  // Real-Time Weather Forecast Application. (See uploaded resume.) :contentReference[oaicite:1]{index=1}
+  const resumeProjects: Project[] = [
     {
-      ...projects[0],
+      title: "Titanic Survival Prediction Model",
+      description: "Classification model predicting passenger survival using logistic regression.",
+      longDescription:
+        "Built a logistic regression model on 891 passenger records achieving ~82% accuracy and 0.79 F1-score. Preprocessed missing values (median imputation for age, mode for embarked), engineered features like family size, fare bins, title extraction and cabin deck. Tuned hyperparameters using GridSearchCV with 5-fold cross-validation.",
+      tech: ["Python", "Scikit-learn", "Pandas", "GridSearchCV", "Jupyter Notebook"],
+      image: "https://images.unsplash.com/photo-1526378722361-0b5d6d2a7fb1?w=800&h=450&fit=crop",
+      github: "https://github.com/Bheeni14/Titanic-Survival-Prediction-System",
+      demo: "https://titanic-survival-prediction-system.vercel.app/",
+      status: "Completed",
+      stats: { stars: 82, forks: 12, views: 420 },
+      features: [
+        "82% accuracy, 0.79 F1-score",
+        "Median/mode imputation for missing data",
+        "Feature engineering (family size, fare bins, title, cabin deck)",
+        "Hyperparameter tuning with GridSearchCV (5-fold)"
+      ],
       category: "Machine Learning",
-      complexity: "Advanced",
-      duration: "3 months",
-      team: 1,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
-    },
-    {
-      ...projects[1],
-      category: "Data Visualization",
       complexity: "Intermediate",
-      duration: "2 months",
-      team: 2,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop"
+      duration: "1 month",
+      team: 1
     },
     {
-      ...projects[2],
+      title: "Student Performance Analysis System",
+      description: "Statistical analysis and visualizations to identify performance drivers.",
+      longDescription:
+        "Analyzed 1,000 student records across multiple variables to identify key drivers of performance. Created 15 visualizations (heatmaps, box plots, histograms), performed hypothesis testing (chi-square) and correlation analysis (Pearson). Derived actionable insights to improve pass rates.",
+      tech: ["Python", "Pandas", "Seaborn", "Statistical Modeling", "Jupyter Notebook"],
+      image: "https://images.unsplash.com/photo-1532614338840-ab30cf10ed0b?w=800&h=450&fit=crop",
+      github: "https://github.com/Bheeni14/Student-Performance-Analysis-System",
+      demo: "https://student-performance-analysis-system-ktub.onrender.com/",
+      status: "Completed",
+      stats: { stars: 45, forks: 6, views: 210 },
+      features: [
+        "15 visualizations for quick insights",
+        "Correlation analysis and hypothesis testing",
+        "Reduced data-interpretation time with clear visual dashboards",
+        "Actionable recommendations to increase pass rate"
+      ],
       category: "Data Analysis",
       complexity: "Intermediate",
       duration: "1.5 months",
-      team: 1,
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=250&fit=crop"
+      team: 1
     },
     {
-      ...projects[3],
-      category: "Machine Learning",
-      complexity: "Advanced",
-      duration: "4 months",
-      team: 3,
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop"
-    },
-    // Additional projects
-    {
-      title: "Real-time Chat Application",
-      description: "Full-stack chat app with real-time messaging and user authentication",
-      longDescription: "A modern real-time chat application built with React, Node.js, and Socket.io featuring user authentication, real-time messaging, file sharing, and responsive design.",
-      tech: ["React", "Node.js", "Socket.io", "MongoDB", "JWT", "Tailwind CSS"],
-      image: "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=250&fit=crop",
-      github: "#",
-      demo: "#",
+      title: "Real-Time Weather Forecast Application",
+      description: "Web app that shows weather for 200+ cities using OpenWeather API.",
+      longDescription:
+        "Developed a responsive web application using JavaScript and the OpenWeather API to fetch and display weather data for 200+ cities. Implemented asynchronous fetch requests to reduce load time, integrated geolocation for automatic detection, and ensured cross-browser compatibility and responsive design.",
+      tech: ["JavaScript", "HTML/CSS", "OpenWeather API", "Fetch API", "Responsive Design"],
+      image: "https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&h=450&fit=crop",
+      github: "https://github.com/Bheeni14/Weather-app",
+      demo: "https://weather-app-ten-woad-44.vercel.app/",
       status: "Completed",
-      stats: { stars: 42, forks: 15, views: 287 },
-      features: ["Real-time messaging", "User authentication", "File sharing", "Responsive design"],
-      category: "Full Stack",
-      complexity: "Advanced",
-      duration: "2 months",
-      team: 2
-    },
-    {
-      title: "Portfolio Website",
-      description: "Modern portfolio website built with Next.js and Tailwind CSS",
-      longDescription: "A responsive and interactive portfolio website showcasing my projects, skills, and experience. Built with modern web technologies and optimized for performance.",
-      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=250&fit=crop",
-      github: "#",
-      demo: "#",
-      status: "Completed",
-      stats: { stars: 28, forks: 9, views: 156 },
-      features: ["Responsive design", "Dark mode", "Smooth animations", "SEO optimized"],
+      stats: { stars: 36, forks: 4, views: 180 },
+      features: [
+        "Handles 200+ cities with fast API responses",
+        "Asynchronous fetch requests for performance",
+        "Geolocation-based automatic location detection",
+        "Responsive UI with high cross-browser compatibility"
+      ],
       category: "Web Development",
-      complexity: "Intermediate",
-      duration: "1 month",
+      complexity: "Beginner",
+      duration: "2 weeks",
       team: 1
     }
   ]
 
-  const categories: string[] = ["all", ...Array.from(new Set(enhancedProjects.map(p => p.category).filter((cat): cat is string => Boolean(cat))))]
-  const filteredProjects = filter === "all" 
-    ? enhancedProjects 
+  // Merge any incoming projects prop that match resume titles, otherwise use resumeProjects
+  const mergedFromProps = projects?.filter(p =>
+    resumeProjects.some(rp => rp.title.toLowerCase() === p.title.toLowerCase())
+  )
+
+  const enhancedProjects: Project[] = mergedFromProps && mergedFromProps.length > 0
+    ? resumeProjects.map(rp => {
+        const matched = mergedFromProps.find(mp => mp.title.toLowerCase() === rp.title.toLowerCase())
+        return matched ? { ...rp, ...matched } : rp
+      })
+    : resumeProjects
+
+  const categories: string[] = ["all", ...Array.from(new Set(enhancedProjects.map(p => p.category).filter(Boolean))) as string[]]
+  const filteredProjects = filter === "all"
+    ? enhancedProjects
     : enhancedProjects.filter(p => p.category === filter)
 
   const getStatusColor = (status: string) => {
@@ -150,7 +160,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
             Featured Projects
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A showcase of my best work, demonstrating expertise in data science, machine learning, and full-stack development
+            A showcase of my best work, demonstrating expertise in data science, machine learning, and web development
           </p>
         </div>
 
@@ -328,7 +338,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
             </div>
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {enhancedProjects.reduce((acc, p) => acc + p.stats.stars, 0)}
+                {enhancedProjects.reduce((acc, p) => acc + (p.stats?.stars || 0), 0)}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Total Stars
@@ -344,7 +354,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
             </div>
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {enhancedProjects.filter(p => p.status === "Completed").length}
+                {enhancedProjects.filter(p => p.status.toLowerCase() === "completed").length}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Completed
