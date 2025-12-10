@@ -17,6 +17,7 @@ import {
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
+/* ---------- Types ---------- */
 interface Skill {
   name: string
   level: number
@@ -33,6 +34,7 @@ interface EnhancedSkillsShowcaseProps {
   skills: Skill[]
 }
 
+/* ---------- EnhancedSkillsShowcase (your component) ---------- */
 export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
   const [filter, setFilter] = useState("all")
@@ -40,75 +42,14 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
 
   const categories = ["all", ...Array.from(new Set(skills.map(skill => skill.category)))]
 
-  // Enhanced skills with additional technologies
-  const enhancedSkills: Skill[] = [
-    ...skills,
-    {
-      name: "React/Next.js",
-      level: 85,
-      icon: Globe,
-      category: "Web Dev",
-      color: "#61dafb",
-      description: "Modern React development with Next.js framework",
-      projects: 6,
-      trending: true
-    },
-    {
-      name: "Node.js",
-      level: 75,
-      icon: Code2,
-      category: "Backend",
-      color: "#68a063",
-      description: "Server-side JavaScript development",
-      projects: 4,
-    },
-    {
-      name: "MongoDB",
-      level: 70,
-      icon: Database,
-      category: "Database",
-      color: "#4db33d",
-      description: "NoSQL database design and optimization",
-      projects: 5,
-    },
-    {
-      name: "AWS",
-      level: 65,
-      icon: Cloud,
-      category: "Cloud",
-      color: "#ff9900",
-      description: "Cloud computing and deployment",
-      projects: 3,
-      new: true
-    },
-    {
-      name: "TensorFlow",
-      level: 80,
-      icon: Brain,
-      category: "AI/ML",
-      color: "#ff6f00",
-      description: "Deep learning framework for ML models",
-      projects: 4,
-    },
-    {
-      name: "Flutter",
-      level: 60,
-      icon: Smartphone,
-      category: "Mobile",
-      color: "#02569b",
-      description: "Cross-platform mobile app development",
-      projects: 2,
-      new: true
-    }
-  ]
-
+  // keep but do not duplicate extra entries here — we accept skills via props
   useEffect(() => {
     const filtered = filter === "all" 
-      ? enhancedSkills 
-      : enhancedSkills.filter(skill => skill.category === filter)
+      ? skills 
+      : skills.filter(skill => skill.category === filter)
     
     setVisibleSkills(filtered)
-  }, [filter])
+  }, [filter, skills])
 
   const getSkillLevelColor = (level: number) => {
     if (level >= 85) return "from-green-500 to-emerald-600"
@@ -279,7 +220,7 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {enhancedSkills.length}+
+                {skills.length}+
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Technologies
@@ -287,7 +228,7 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
             </div>
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {Math.round(enhancedSkills.reduce((acc, skill) => acc + skill.level, 0) / enhancedSkills.length)}%
+                {Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Avg Proficiency
@@ -295,7 +236,7 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
             </div>
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-red-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {enhancedSkills.reduce((acc, skill) => acc + skill.projects, 0)}+
+                {skills.reduce((acc, skill) => acc + skill.projects, 0)}+
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Total Projects
@@ -303,7 +244,7 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
             </div>
             <div className="group">
               <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
-                {categories.length - 1}
+                {Array.from(new Set(skills.map(s => s.category))).length}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-300 font-medium">
                 Categories
@@ -314,4 +255,45 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
       </div>
     </section>
   )
+}
+
+/* ---------- Full skills list (everything included) ---------- */
+const skills: Skill[] = [
+  { name: "HTML5", level: 95, icon: Code, category: "Web Dev", color: "#E34F26", description: "Semantic HTML and accessibility-first markup", projects: 20 },
+  { name: "CSS3", level: 92, icon: Code, category: "Web Dev", color: "#2965F1", description: "Responsive layouts, flexbox, grid, animations", projects: 18 },
+  { name: "JavaScript (ES6+)", level: 90, icon: Code2, category: "Web Dev", color: "#F0DB4F", description: "Modern JS, DOM manipulation, tooling", projects: 25, trending: true },
+  { name: "TypeScript", level: 82, icon: Code2, category: "Web Dev", color: "#3178C6", description: "Typed JavaScript for safer code", projects: 12 },
+  { name: "React", level: 88, icon: Globe, category: "Web Dev", color: "#61dafb", description: "Component-driven UI with hooks & context", projects: 14, trending: true },
+  { name: "Next.js", level: 85, icon: Globe, category: "Web Dev", color: "#000000", description: "SSR/SSG and fullstack React framework", projects: 8 },
+  { name: "Tailwind CSS", level: 84, icon: Code, category: "Web Dev", color: "#38B2AC", description: "Utility-first CSS for rapid UI development", projects: 10 },
+  { name: "Node.js", level: 78, icon: Code2, category: "Backend", color: "#68a063", description: "Server-side JavaScript with Express/Koa", projects: 10 },
+  { name: "Express.js", level: 75, icon: Code2, category: "Backend", color: "#000000", description: "Lightweight APIs and routing", projects: 9 },
+  { name: "MongoDB", level: 72, icon: Database, category: "Database", color: "#4db33d", description: "NoSQL schema design and aggregation", projects: 7 },
+  { name: "PostgreSQL", level: 70, icon: Database, category: "Database", color: "#336791", description: "Relational DB design, indexing, queries", projects: 6 },
+  { name: "Redis", level: 65, icon: Database, category: "Database", color: "#DC382D", description: "In-memory caching and pub/sub", projects: 4, new: true },
+  { name: "Python", level: 88, icon: Code, category: "AI/ML", color: "#3776AB", description: "Scripting, data pipelines, ML experiments", projects: 18 },
+  { name: "TensorFlow", level: 80, icon: Brain, category: "AI/ML", color: "#FF6F00", description: "Deep learning models and training", projects: 5 },
+  { name: "PyTorch", level: 78, icon: Brain, category: "AI/ML", color: "#EE4C2C", description: "Flexible DL research & prototyping", projects: 4 },
+  { name: "Pandas / NumPy", level: 86, icon: LineChart, category: "Data", color: "#2ca02c", description: "Data analysis, cleaning and feature engineering", projects: 12 },
+  { name: "Machine Learning", level: 82, icon: Brain, category: "AI/ML", color: "#ffb84d", description: "Classical ML, feature engineering, evaluation", projects: 10 },
+  { name: "C++", level: 70, icon: Cpu, category: "Systems", color: "#004482", description: "Performance-oriented systems programming", projects: 6 },
+  { name: "Java", level: 68, icon: Code, category: "Backend", color: "#b07219", description: "OOP, multithreading, enterprise tooling", projects: 5 },
+  { name: "Docker", level: 76, icon: Cloud, category: "DevOps", color: "#2496ED", description: "Containerization and local reproducibility", projects: 10 },
+  { name: "Kubernetes", level: 64, icon: Cloud, category: "DevOps", color: "#326ce5", description: "Orchestration and deployment", projects: 3, new: true },
+  { name: "AWS", level: 66, icon: Cloud, category: "Cloud", color: "#FF9900", description: "Cloud infra: EC2, S3, Lambda, RDS", projects: 5 },
+  { name: "Azure", level: 60, icon: Cloud, category: "Cloud", color: "#0078D4", description: "Cloud services and deployments", projects: 2 },
+  { name: "Git & GitHub", level: 92, icon: Code, category: "Tools", color: "#F1502F", description: "Version control, PR/workflow, code review", projects: 40 },
+  { name: "Linux", level: 75, icon: Cpu, category: "Systems", color: "#FCC624", description: "Shell, tooling, package management", projects: 8 },
+  { name: "Databricks", level: 60, icon: LineChart, category: "Data", color: "#F8991C", description: "Big data pipelines and notebooks", projects: 2 },
+  { name: "Redis (cache)", level: 64, icon: Database, category: "Database", color: "#DC382D", description: "Fast caching and store", projects: 3 },
+  { name: "Flutter", level: 60, icon: Smartphone, category: "Mobile", color: "#02569b", description: "Cross-platform mobile development", projects: 2, new: true },
+  { name: "Mobile (native)", level: 55, icon: Smartphone, category: "Mobile", color: "#4c9f70", description: "Android/iOS basics & integrations", projects: 2 },
+  { name: "REST & GraphQL", level: 80, icon: Code, category: "APIs", color: "#7b61ff", description: "API design, docs, and versioning", projects: 14 },
+  { name: "Testing (Jest, PyTest)", level: 72, icon: Code, category: "Quality", color: "#00C2A8", description: "Unit and integration testing best practices", projects: 8 },
+  { name: "CI/CD", level: 70, icon: Cloud, category: "DevOps", color: "#2d8cff", description: "Automated pipelines & deployments", projects: 7 }
+]
+
+/* ---------- Default export that uses the component ---------- */
+export default function SkillsClient() {
+  return <EnhancedSkillsShowcase skills={skills} />
 }
