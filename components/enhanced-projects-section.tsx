@@ -55,7 +55,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
       longDescription:
         "Built a logistic regression model on 891 passenger records achieving ~82% accuracy and 0.79 F1-score. Preprocessed missing values (median imputation for age, mode for embarked), engineered features like family size, fare bins, title extraction and cabin deck. Tuned hyperparameters using GridSearchCV with 5-fold cross-validation.",
       tech: ["Python", "Scikit-learn", "Pandas", "GridSearchCV", "Jupyter Notebook"],
-      image: "https://images.unsplash.com/photo-1526378722361-0b5d6d2a7fb1?w=800&h=450&fit=crop",
+      image: "./titanic.png",
       github: "https://github.com/Bheeni14/Titanic-Survival-Prediction-System",
       demo: "https://titanic-survival-prediction-system.vercel.app/",
       status: "Completed",
@@ -77,7 +77,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
       longDescription:
         "Analyzed 1,000 student records across multiple variables to identify key drivers of performance. Created 15 visualizations (heatmaps, box plots, histograms), performed hypothesis testing (chi-square) and correlation analysis (Pearson). Derived actionable insights to improve pass rates.",
       tech: ["Python", "Pandas", "Seaborn", "Statistical Modeling", "Jupyter Notebook"],
-      image: "https://images.unsplash.com/photo-1532614338840-ab30cf10ed0b?w=800&h=450&fit=crop",
+      image: "./student.png",
       github: "https://github.com/Bheeni14/Student-Performance-Analysis-System",
       demo: "https://student-performance-analysis-system-ktub.onrender.com/",
       status: "Completed",
@@ -99,7 +99,7 @@ export function EnhancedProjectsSection({ projects }: EnhancedProjectsSectionPro
       longDescription:
         "Developed a responsive web application using JavaScript and the OpenWeather API to fetch and display weather data for 200+ cities. Implemented asynchronous fetch requests to reduce load time, integrated geolocation for automatic detection, and ensured cross-browser compatibility and responsive design.",
       tech: ["JavaScript", "HTML/CSS", "OpenWeather API", "Fetch API", "Responsive Design"],
-      image: "https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&h=450&fit=crop",
+      image: "./weather.png",
       github: "https://github.com/Bheeni14/Weather-app",
       demo: "https://weather-app-ten-woad-44.vercel.app/",
       status: "Completed",
