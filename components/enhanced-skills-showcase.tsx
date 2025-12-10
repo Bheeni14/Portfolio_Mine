@@ -34,22 +34,28 @@ interface EnhancedSkillsShowcaseProps {
   skills: Skill[]
 }
 
-/* ---------- EnhancedSkillsShowcase (your component) ---------- */
+/* ---------- EnhancedSkillsShowcase (updated with Show more / Show less) ---------- */
 export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null)
   const [filter, setFilter] = useState("all")
   const [visibleSkills, setVisibleSkills] = useState<Skill[]>([])
+  const [showAll, setShowAll] = useState(false)
+
+  const PER_PAGE = 6
 
   const categories = ["all", ...Array.from(new Set(skills.map(skill => skill.category)))]
 
-  // keep but do not duplicate extra entries here — we accept skills via props
   useEffect(() => {
     const filtered = filter === "all" 
       ? skills 
       : skills.filter(skill => skill.category === filter)
     
     setVisibleSkills(filtered)
+    // reset showAll when filter changes so user sees top items first
+    setShowAll(false)
   }, [filter, skills])
+
+  const renderedSkills = showAll ? visibleSkills : visibleSkills.slice(0, PER_PAGE)
 
   const getSkillLevelColor = (level: number) => {
     if (level >= 85) return "from-green-500 to-emerald-600"
@@ -96,7 +102,7 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
 
         {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {visibleSkills.map((skill, index) => (
+          {renderedSkills.map((skill, index) => (
             <Card
               key={`${skill.name}-${index}`}
               className={`group relative overflow-hidden border-0 bg-gradient-to-br from-white/80 via-white/60 to-gray-50/80 dark:from-gray-800/80 dark:via-gray-800/60 dark:to-gray-900/80 backdrop-blur-lg hover:scale-105 transition-all duration-500 cursor-pointer ${
@@ -214,6 +220,18 @@ export function EnhancedSkillsShowcase({ skills }: EnhancedSkillsShowcaseProps) 
             </Card>
           ))}
         </div>
+
+        {/* Show more / Show less */}
+        {visibleSkills.length > PER_PAGE && (
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={() => setShowAll(prev => !prev)}
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium shadow-lg hover:opacity-95 transition"
+            >
+              {showAll ? "Show less" : `Show ${visibleSkills.length - PER_PAGE} more`}
+            </button>
+          </div>
+        )}
 
         {/* Skills Summary */}
         <div className="mt-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20 rounded-3xl p-8 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
