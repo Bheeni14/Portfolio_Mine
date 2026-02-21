@@ -331,7 +331,7 @@ export function EnhancedHeroSection({ isVisible }: EnhancedHeroSectionProps) {
               
               <MagneticButton className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-xl px-6 py-4">
                 <a
-                  href="https://drive.google.com/file/d/1JCJBjTHtJq3U4HP5NOnuTZH_l1v9naXN/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1DVzARColv-5qscs2AI8FGIuhBeQ1hg9Q/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center"
